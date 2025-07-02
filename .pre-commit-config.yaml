@@ -1,0 +1,23 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: trailing-whitespace  # удаляет пробелы в конце строк
+      - id: end-of-file-fixer    # гарантирует наличие пустой строки в конце файла
+      - id: check-yaml          # проверяет синтаксис YAML
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.3.7
+    hooks:
+      - id: ruff
+        args: [--fix]  # автоматически исправляет ошибки, если возможно
+
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.10.0
+    hooks:
+      - id: mypy
+        args: [
+          --disable-error-code=annotation-unchecked,  # Игнорировать отсутствие аннотаций
+          --disable-error-code=no-any-unimported,     # Игнорировать `Any` и отсутствующие импорты
+          --disable-error-code=attr-defined           # Игнорировать "module has no attribute"
+        ]  # игнорировать отсутствующие импорты
