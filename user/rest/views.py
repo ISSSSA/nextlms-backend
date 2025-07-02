@@ -1,3 +1,4 @@
+import uuid
 from django.contrib.auth import login, authenticate
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -6,14 +7,15 @@ from django.views import View
 from drf_yasg.utils import swagger_auto_schema
 import secrets
 
+
 @method_decorator(csrf_exempt, name='dispatch')
 class AuthNonceView(View):
     @swagger_auto_schema()
     def get(self, request, wallet_address):
-        print(wallet_address)
         nonce = secrets.token_hex(32)
         request.session[f'auth_nonce_{wallet_address.lower()}'] = nonce
         return JsonResponse({'nonce': nonce})
+
 
 @method_decorator(csrf_exempt, name='dispatch')
 class AuthVerifyView(View):
