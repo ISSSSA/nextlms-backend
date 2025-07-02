@@ -1,7 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.backends import BaseBackend
 from web3 import Web3
-from web3.middleware import geth_poa_middleware
 
 User = get_user_model()
 
